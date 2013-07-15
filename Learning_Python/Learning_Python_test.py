@@ -131,8 +131,6 @@ print( (managers|engineers) - (managers^engineers) )
 
 print( True + 1 )
  
-print('hello')
-
 
 
 
