@@ -202,8 +202,61 @@ name, age, jobs = bob
 print(name, jobs)
 # Iteration context
 for x in bob: print(x)
+print('\n')
+bob = {'name': 'Bob', 'age':40.5, 'jobs': ['dev', 'mgr']}
+job, name, age = bob.values()
+print(name, job)
+print('\n')
+for x in bob: 
+    print(bob[x])
 
+for x in bob.values():
+    print(x)
 
+X, Y, Z = 43, 44, 45
+S = 'Spam'
+D = {'a':1, 'b':2}
+L = [1, 2, 3]
+
+print(X, Y, Z)
+print(S)
+print(D)
+print(L)
+
+print('')
+
+F = open('datafile.txt', 'w')
+print( F.write(S + '\n') )
+print( F.write('%s, %s, %s\n' % (X, Y, Z) ) )
+print( F.write( str(L) + '$' + str(D) + '\n') )
+F.close()
+
+chars = open('datafile.txt', 'r').read()
+print(chars)
+
+F = open('datafile.txt', 'r')
+line = F.readline()
+print(line)
+print(line.rstrip())
+
+line = F.readline()
+print(line)
+
+parts = line.split(',')
+print(parts)
+#print( line.strip('4'))
+print( int(parts[1]) )
+
+numbers = [ int(p) for p in parts ]
+print(numbers)
+
+line = F.readline()
+print(line)
+parts = line.split('$')
+print(parts)
+
+object = [ eval(p) for p in parts ]
+print(object)
 
 
 
