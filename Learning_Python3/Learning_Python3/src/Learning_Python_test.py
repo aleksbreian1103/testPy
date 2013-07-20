@@ -23,7 +23,7 @@ print(diag)
 doubles = ( c*2 for c in 'spam')
 print(doubles)
 for i in doubles:
-    print(i, end = '')
+    print(i)
 print('\n')    
 # Create a generator object    
 G = ( sum(row) for row in M)
@@ -255,8 +255,8 @@ print(line)
 parts = line.split('$')
 print(parts)
 
-object = [ eval(p) for p in parts ]
-print(object)
+objecto = [ eval(p) for p in parts ]
+print(objecto)
 
 print('')
 # Storing Native Python Objects: pickle
@@ -478,9 +478,15 @@ F.close()
 print('')
 
 
+import sys
+print(sys.version)
 
-
-
+while True:
+    reply = input('Enter text:')
+    if reply == 'stop' or 'STOP' or 'Stop': break
+    print(reply.upper())
+    
+    
 
 
 
