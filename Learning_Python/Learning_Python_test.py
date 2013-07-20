@@ -258,20 +258,225 @@ print(parts)
 object = [ eval(p) for p in parts ]
 print(object)
 
+print('')
+# Storing Native Python Objects: pickle
+
+D = {'a' : 1, 'b' : 2}
+F = open('datafile.pkl', 'wb')
+import pickle
+pickle.dump(D, F)
+F.close()
+
+F = open('datafile.pkl', 'rb')
+E = pickle.load(F)
+print(E)
+
+print('')
+# JSON
+
+name = dict(first = 'Bob', last = 'Smith')
+rec = dict( name = name, job = ['dev', 'mgr'], age = 40.5)
+print(rec)
+print(rec['name']['first'])
+
+print('')
+
+import json
+print(json.dumps(rec))
+
+S = json.dumps(rec)
+print(S)
+
+O = json.loads(S)
+print(O)
+
+print(O == rec)
+print('')
+
+json.dump(rec, fp = open('testjson.txt', 'w'), indent = 4)
+print( open('testjson.txt').read() )
+
+P = json.load(open('testjson.txt'))
+print(P)
+
+print('')
+
+# Storing binary data: the C struct
+F = open('data.bin', 'wb')
+import struct
+data = struct.pack('>i4sh', 7, b'spam', 8)
+print(data)
+F.write(data)
+F.close()
+
+F = open('data.bin', 'rb')
+data = F.read()
+print(data)
+values = struct.unpack('>i4sh', data)
+print(values)
+
+print('')
+
+# File context managers
+#with open(r'/Users/Aleks/data.txt') as myfile:
+#    for line in myfile:
+#        print(line)
+
+# Object Flexibility: nested compound sequence objects:
+L = [ 'abc', [ (1, 2), ([3], 4)], 5]
+print(L)
+print(L[1][1])
+print(L[1][1][0])
+print(L[1][1][0][0])
+print(L[1][0][1])
+
+2**16
+65536
+2/5, 2/5.0
+(0, 0.4)
+3/5
+
+'spam' + 'eggs'
+
+S = 'ham'
+'eggs' + S
+S*5
+S[:0]
+S[:1]
+S[0:]
+
+print('green %s and %s' % ('eggs', S))
+'green {0} and {1}'.format('eggs', S)
+
+print(('x')[0])
+
+print(('x',)[0])
+
+#('x',)[1]
+
+print(('x', 'y')[1])
+
+L = [1, 2, 3] + [4, 5, 6]
+print(L)
+print(L[:])
+
+print(L[:0])
+print(L[-2])
+
+print(L[-2:])
+
+print( ( [1,2,3], [4,5,6] )[2:4] )
+print( ( [1,2,3], [4,5,6] )[0:1] )
+print( ( [1,2,3], [4,5,6] )[0][2] )
+print( [ L[2], L[3] ] )
+print( L.reverse() )
+
+print( L.sort() )
+
+print(L.index(4))
 
 
+print( {'a':1, 'b':2}['b'] )
+
+D = {'x':1, 'y':2, 'z':3}
+print(D)
+D['w'] = 0
+print(D['x']+D['w'])
+D[(1,2,3)] = 4
+print(list(D.keys()) )
+print( D[(1,2,3)] )
+print( list(D.items()) )
+print( list(D.values()) )
+print( (1,2,3) in D )
 
 
+print( [[]], ['', [], (), {}, None] )
 
+L = [0,1,2,3]
+print(L)
+#L[4]
+print( L[-1000:100] )
+print( L[3:1] )
+L[3:1] = ['?']
+print( L )
 
+L = [0, 1, 2 ,3]
+L[2] = []
+print(L)
 
+L[2:3] = []
+print(L)
 
+del L[0]
+print(L)
 
+del L[1:]
+print(L)
 
+#L[1:2] = 1
 
+# Section II, Q4: Tuple assignment
+X = 'spam'
+Y = 'eggs'
+print(X, Y)
+X, Y = Y, X
+print(X, Y)
 
+# Q5: Dictionary keys
+D = {}
+D[1] = 'a'
+D[2] = 'b'  # The keys are not accessed by offsets. However, numbers are immutable, and
+# any hashable object kan be used as a key. Also, dictionaries support assignment "out-of-bounds"
+print(D)
 
+D[(1, 2, 3)] = 'c'
+print(D)
+print('')
 
+# Q6: Dictionary indexing
+D = {'a' : 1, 'b' : 2, 'c' : 3}
+print(D)
+#D['d']
+D['d'] = 'spam'
+print(D)
+print('')
+
+#Q8: Generic options
+S = 'spam'
+print(S[0][0][0][0][0])
+S = ['s', 'p', 'a', 'm']
+print( S[0][0][0][0][0] )
+print('')
+
+# Q9: Immutable types
+S = 'spam'
+S = S[:1] + 'lam'
+print(S)
+S = S[0] + 'lam'
+print(S)
+print('')
+
+# Q10: Nesting
+D = {'name': {'first' : 'Aleks', 'last' : 'Hansen'}, 'age': 28, 'email' : 'aleksbreian@gmail.com', 
+     'phone' : 3147073062 }
+print( D['name']['last'] )
+
+print('')
+
+# Q11:
+F = open('myfile.txt', 'w')
+F.write('Hello file world!\n')
+F.write('Wonder if this works\n')
+F.close()
+
+F = open('myfile.txt')
+print(F.read())
+#for line in F:
+#    print(line, end = '')
+F.close()
+
+print('')
+    
 
 
 
