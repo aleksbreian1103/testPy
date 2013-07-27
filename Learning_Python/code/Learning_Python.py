@@ -643,3 +643,20 @@ print( list( zip(X,Y) ) )
 
 A, B = zip(*zip(*zip(*zip(X, Y))))
 print(A, B)  
+
+#print(2**38)
+#F = [line for line in open('challenge_two.txt', 'r')]
+#F = str(F)
+
+
+#def trans(char):
+#    if ord(char) > ord('z') or ord(char) < ord('a'):
+#        return char
+#    else:
+#        return chr(ord('a') + (ord(char) - ord('a') + 2) % 26)
+ 
+#print( ''.join(trans(char) for char in F), end = '' )
+
+
+
+
