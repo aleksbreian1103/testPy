@@ -7,8 +7,7 @@ print('x' + b'y'.decode())
 print('x'.encode() +b'y')
 # Pattern matching
 import re
-match = re.match('Hello[ \t]*(.*)world', 
-                 'Hello    Python  world')
+match = re.match('Hello[ \t]*(.*)world', 'Hello Python world')
 print(match.group(1))
 match = re.match('[/:](.*)[/:](.*)[:](.*)',
                  '/usr/home:lumberjack')
@@ -348,7 +347,7 @@ S[0:]
 print('green %s and %s' % ('eggs', S))
 'green {0} and {1}'.format('eggs', S)
 
-print(('x')[0])
+print('x'[0])
 
 print(('x',)[0])
 
@@ -457,9 +456,9 @@ print(S)
 print('')
 
 # Q10: Nesting
-D = {'name': {'first' : 'Aleks', 'last' : 'Hansen'}, 'age': 28, 'email' : 'aleksbreian@gmail.com', 
-     'phone' : 3147073062 }
-print( D['name']['last'] )
+D = {'name': {'first': 'Aleks', 'last': 'Hansen'}, 'age': 28,
+      'email': 'aleksbreian@gmail.com', 'phone': 3147073062}
+print(D['name']['last'])
 
 print('')
 
@@ -489,68 +488,69 @@ print('')
 #    print(int(reply) ** 2)
 #print('Bye')
 
-print( open('script2.py', 'r').read())
+print(open('script2.py', 'r').read())
 #open('script2.py','r').read()
 f = open('script2.py', 'r')
-print( f.readline() )
-print( f.readline() )
-print( f.readline() )
-print( f.readline() )
-print( f.readline() )
+print(f.readline())
+print(f.readline())
+print(f.readline())
+print(f.readline())
+print(f.readline())
 
 f = open('script2.py', 'r')
-print( f.__next__() )
-print( f.__next__() )
-print( f.__next__() )
-print( f.__next__() )
+print(f.__next__())
+print(f.__next__())
+print(f.__next__())
+print(f.__next__())
 
 # Old way, loads entire file into memory
 for line in open('script2.py', 'r').readlines():
     print(line.upper(), end='')
-    
+
 print('')
 
 # New better way
 for line in open('script2.py', 'r'):
-    print( line.upper(), end='')   
+    print( line.upper(), end='')
  
 print('\n')
-        
+ 
 # next() f.__next__()
 f = open('script2.py', 'r')
-print( f.__next__() )
-print( f.__next__() )
+print(f.__next__())
+print(f.__next__())
 
 print('')
 
 #Easier next() method:
 f = open('script2.py', 'r')
-print( next(f) )
-print( next(f) )      
+print(next(f))
+print(next(f))
 
 L = [1, 2, 3]
 I = iter(L)
-print(I.__next__() )
-print(I.__next__() )
-print(I.__next__() )
+print(I.__next__())
+print(I.__next__())
+print(I.__next__())
 #print(I.__next__() )
 print('')
 
 f = open('script2.py', 'r')
 print(iter(f) is f)
-print(iter(f) is f.__iter__() )
-print( f.__next__() )
+print(iter(f) is f.__iter__())
+print(f.__next__())
 
 print('')
 
 # usual way to get the keys in a dictionary
-D = {'a':1, 'b':2, 'c':3}
+D = {'a': 1, 'b': 2, 'c': 3}
 for key in D.keys():
     print(key, D[key])
-    
+
 print('')
 
-#Dictionaries are iterables with an interator that automatically returns one key at a time:
+#Dictionaries are iterables with an interator that automatically
+# returns one key at a time:
 I = iter(D)
 print(next(I))
 print(next(I))
@@ -570,8 +570,8 @@ print('\n', list(R))
 E = enumerate('spam')
 print(E)
 I = iter(E)
-print( next(I) )
-print( list(enumerate('spam')))
+print(next(I))
+print(list(enumerate('spam')))
 
 L = [1, 2, 3, 4]
 L = [x + 10 for x in L]
@@ -587,7 +587,7 @@ lines = f.readlines()
 print(lines)
 
 lines = [line.rstrip() for line in lines]
-print(lines)    
+print(lines)
 
 #shorter - don't open the file separately
 lines = [line.rstrip() for line in open('script2.py', 'r')]
@@ -617,32 +617,36 @@ print(lines)
 length = len(open('script2.py', 'r').readlines())
 print(length)
 
-print (len([length for length in open('script2.py', 'r') if length.strip()!='']) )
+print(len([length for length in open('script2.py', 'r') if length.strip() != '']))
 
 ordered_collection = [x + y for x in 'abc' for y in 'lmn']
 print(ordered_collection)
 
-print( { i : line.rstrip()  for (i, line) in enumerate(open('script2.py', 'r')) if line[0] == 'p'} )
+print({i: line.rstrip()
+       for (i, line) in enumerate(open('script2.py', 'r')) if line[0] == 'p'})
 
 # Generator expression
-lines = (line.upper() for line in open('script2.py', 'r') )
+lines = (line.upper() for line in open('script2.py', 'r'))
 print(lines)
 print(list(lines))
 
-# *arg can be in function calls to unpack a collection of values into individual arguments.
+# *arg can be in function calls to unpack a collection of
+# values into individual arguments.
+
+
 def f(a, b, c, d):
-    print(a, b, c, d, sep = '&')
-    
-f(1,2,3,4)
+    print(a, b, c, d, sep='&')
+
+f(1, 2, 3, 4)
 f(*[1, 2, 3, 4])
 f(*open('script2.py', 'r'))
 
 X = (1, 2)
 Y = (3, 4)
-print( list( zip(X,Y) ) ) 
+print(list(zip(X, Y)))
 
 A, B = zip(*zip(*zip(*zip(X, Y))))
-print(A, B)  
+print(A, B)
 
 #print(2**38)
 #F = [line for line in open('challenge_two.txt', 'r')]
@@ -654,8 +658,74 @@ print(A, B)
 #        return char
 #    else:
 #        return chr(ord('a') + (ord(char) - ord('a') + 2) % 26)
- 
+
 #print( ''.join(trans(char) for char in F), end = '' )
+
+def minmax(test, *args):
+    res = args[0]
+    for arg in args[1:]:
+        if test(arg, res):
+            res = arg
+    return res
+
+def lessthan(x, y):
+    return x < y
+
+def morethan(x, y):
+    return x > y
+
+print(minmax(lessthan, 4, 2, 1, 5, 6, 3))
+print(minmax(morethan, 4, 2, 1, 5, 6, 3))
+
+def func(a, *b, c = 6, **d):
+    print(a, b, c, d)
+    
+func(1, *(2, 3), **dict(x = 4, y = 5))
+func(1, *(2, 3), c = 7, **dict(x = 4, y = 5))
+func(1, c = 7, *(2, 3), **dict(x = 4, y = 5))
+func(1, *(2, 3), **dict(x = 4, y = 5, c = 7))
+
+
+def intersect(*args):
+    res = []
+    for x in args[0]:
+        if x in res:
+            continue
+        for other in args[1:]:
+            if x not in other:
+                break
+        else:
+            res.append(x)
+    return res
+
+def union(*args):
+    res = []
+    for seq in args:
+        for x in seq:
+            if x not in res:
+                res.append(x)
+    return res
+
+s1, s2, s3 = 'SPAM', 'SCAM', 'SLAM'
+
+print(intersect(s1, s2), union(s1, s2))
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
