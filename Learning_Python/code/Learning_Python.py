@@ -750,7 +750,7 @@ print3(4, 5, 6, sep = '', end = '')
 print3(7, 8, 9)
 print3()
 
-print3(1, 2, 3, sep = '??', end = '.\n', file = sys.stderr)
+#print3(1, 2, 3, sep = '??', end = '.\n', file = sys.stderr)
 
 """
 Use 3.X keyword-only args
@@ -781,7 +781,163 @@ def print32(*args, **kargs):
 #print32(99, name = 'bob')
 print32(4, 5, 6, sep = ',')
     
-#Advanced Function Topics.
+"""
+Advanced Function Topics.
+"""
+# Recursion
+def mysum(L):
+    if not L:
+        return 0
+    else:
+        return L[0] + mysum(L[1:])
+    
+print(mysum([1, 2, 3, 4, 5]))
+
+def mysum2(L):
+    return 0 if not L else L[0] + mysum2(L[1:])
+
+print(mysum2([1, 2, 3, 4]))
+
+# mysum3 and mysum3 fail for empty lists but allow for sequences
+# of any object type that supports +, not just numbers.
+def mysum3(L):
+    return L[0] if len(L) == 1 else L[0] + mysum3(L[1:])
+
+# mysum4 works for arbitrary iterables, including open input files.
+def mysum4(L):
+    first, *rest = L
+    return first if not rest else first + mysum4(rest)
+
+print(mysum4([1]))
+print(mysum4([1, 2, 3, 4, 5]))
+print(mysum4(('s', 'p', 'a', 'm')))
+print(mysum4(['spam', 'ham', 'eggs']))
+print(mysum4(open('script2.py', 'r')))
+
+print('')
+
+def mysum5(L):
+    if not L: return 0
+    return nonempty(L)
+    
+def nonempty(L):
+    return L[0] + mysum5(L[1:])
+
+
+print(mysum5([1.1, 2.2, 3.3, 4.4]))
+
+L = [1, 2, 3, 4, 5]
+sum = 0
+while L:
+    sum += L[0]
+    L = L[1:]
+print(sum)
+
+sum = 0
+L = [1, 2, 3, 4, 5]
+for x in L:
+    sum += x
+print(sum)
+
+# Handling arbitrary sructures
+
+L = [1, [2, [3, 4], 5], 6, [7, 8]]
+
+#Sumtree
+def sumtree(L):
+    tot = 0
+    for x in L:
+        if not isinstance(x, list):
+            tot += x
+        else:
+            tot += sumtree(x)
+    return tot
+
+print(sumtree(L))
+
+print('')
+
+# lambda
+f = lambda x, y, z: x + y + z
+print(f(2, 3, 4))
+
+z = (lambda a = 'fee', b = 'fie', c = 'foe': a + b + c)
+print(z('wee'))
+
+def knights():
+    title = 'Sir'
+    action = (lambda x: title + ' ' + x)
+    return action
+
+act = knights()
+msg = act('robin')
+print(msg)
+
+print('')
+
+#lambda works inside a list literal
+L = [lambda x: x ** 2,
+     lambda x: x ** 3,
+     lambda x: x ** 4]
+
+for f in L:
+    print(f(2))
+
+print(L[0](3))
+print(L[1](3))
+print(L[-1](3))
+
+print('')
+
+key = 'got'
+print({'already': (lambda: 2 + 2),
+'got': (lambda: 2 * 4),
+'one': (lambda: 2 ** 6)}[key]())
+
+print('')
+
+lower = (lambda x, y: x if x < y else y)
+print(lower('bb', 'aa'))
+
+showall = lambda x: list(map(sys.stdout.write, x))
+t = showall(['spam\n', 'toast\n', 'eggs\n'])
+print(t)
+
+showall = lambda x: [sys.stdout.write(line) for line in x]
+t = showall(('bright\n', 'side\n', 'of\n', 'life\n'))
+print(t)
+
+
+showall = lambda x: [print(line, end = '') for line in x]
+t = showall('linefor all')
+print(t)
+
+showall = lambda x: print(*x, sep = '', end = '') 
+t = showall('line')
+print(t)
+
+print('')
+
+def action(x):
+    return (lambda y: x + y)
+
+act = action(99)
+print(act(2))
+
+action = (lambda x: (lambda y: x + y))
+act = action(99)
+print(act(3))
+
+print(((lambda x: (lambda y: x + y))(99))(4))
+
+from tkinter import Button, mainloop
+x = Button(
+           text = 'Press me',
+           command = (lambda: sys.stdout.write('Spam\n')))
+x.pack()
+mainloop()
+           
+
 
 
 
