@@ -709,12 +709,79 @@ def union(*args):
 s1, s2, s3 = 'SPAM', 'SCAM', 'SLAM'
 
 print(intersect(s1, s2), union(s1, s2))
+print(intersect([1, 2, 3, 4], (1, 4)))
+print(intersect(s1, s2, s3))  
+print(union(s1, s2, s3))
 
+def tester(func, items, trace = True):
+    for i, _ in enumerate(items):
+        items = items[1:] + items[:1]
+        if trace:
+            print(items)
+        print(sorted(func(*items)))
         
+tester(intersect, ('a', 'abcdefg', 'abdst', 'albmcnd'))
+tester(union, ('a', 'abcdefg', 'abdst', 'albmnc'), False)
+tester(intersect, ('ba', 'abcdefg', 'abdst', 'albmncd'), False)
 
+"""
+Emulate most of the 3.X print function for use in 2.X (and 3.X).
+Call signature: print3(*args, sep = ' ', end = '\n', file = sys.stdout)
+"""
+#import sys
 
+def print3(*args, **kargs):
+    sep = kargs.get('sep', ',')
+    end = kargs.get('end', '\n')
+    file = kargs.get('file', sys.stdout)
+    output = ''
+    first = True
+    for arg in args:
+        output += ('' if first else sep) + str(arg)
+        first = False
+    file.write(output + end)
+    
+print3(1, 2, 3)
+print3(1, 2, 3, sep = '')
+print3(1, 2, 3, sep = '...')
+print3(1, [2], (3,), sep = '...')
 
+print3(4, 5, 6, sep = '', end = '')
+print3(7, 8, 9)
+print3()
 
+print3(1, 2, 3, sep = '??', end = '.\n', file = sys.stderr)
+
+"""
+Use 3.X keyword-only args
+"""
+def print31(*args, sep = ' ', end = '\n', file = sys.stdout):
+    output = ''
+    first = True
+    for arg in args:
+        output += ('' if first else sep) + str(arg)
+        first = False
+    file.write(output + end)
+    
+"""
+Use 2.X/3.X keyword ars deletion with defaults
+"""
+def print32(*args, **kargs):
+    sep = kargs.pop('sep', ' ')
+    end = kargs.pop('end', '\n')
+    file = kargs.pop('file', sys.stdout)
+    if kargs: raise TypeError('extra keywords: %s' % kargs)
+    output = ''
+    first = True
+    for arg in args:
+        output += ('' if first else sep) + str(arg)
+        first = False
+    file.write(output + end)
+
+#print32(99, name = 'bob')
+print32(4, 5, 6, sep = ',')
+    
+#Advanced Function Topics.
 
 
 
