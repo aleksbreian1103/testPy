@@ -827,17 +827,17 @@ def nonempty(L):
 print(mysum5([1.1, 2.2, 3.3, 4.4]))
 
 L = [1, 2, 3, 4, 5]
-sum = 0
+sumone = 0
 while L:
-    sum += L[0]
+    sumone += L[0]
     L = L[1:]
-print(sum)
+print(sumone)
 
-sum = 0
+sumone = 0
 L = [1, 2, 3, 4, 5]
 for x in L:
-    sum += x
-print(sum)
+    sumone += x
+print(sumone)
 
 # Handling arbitrary sructures
 
@@ -930,16 +930,69 @@ print(act(3))
 
 print(((lambda x: (lambda y: x + y))(99))(4))
 
-from tkinter import Button, mainloop
-x = Button(
-           text = 'Press me',
-           command = (lambda: sys.stdout.write('Spam\n')))
-x.pack()
-mainloop()
-           
+#from tkinter import Button, mainloop
+#x = Button(
+#           text = 'Press me',
+#           command = (lambda: sys.stdout.write('Spam\n')))
+#x.pack()
+#mainloop()
+ 
+# Functional programming tools
+          
+counters = [1, 2, 3, 4]
+updated = []
+for x in counters:
+    updated.append(x + 10)
 
+print(updated)
 
+def inc(x):
+    return x + 10
 
+print(list(map(inc, counters)))
+
+print(list(map((lambda x: x + 3), counters)))
+
+def mymap(func, seq):
+    res = []
+    for x in seq: 
+        res.append(func(x))
+    return res
+
+print(mymap(inc,counters))
+
+print(list(map(inc, [1, 2, 3])))
+print(mymap(inc, [1, 2, 3]))
+
+print('')
+
+print(list(map(pow, [1, 2, 3], [2, 3, 4])))
+
+print(list(map(inc, [1, 2, 3, 4])))
+print([inc(x) for x in [1, 2, 3, 4]])
+
+print(list(filter((lambda x: x> 0), range(-5, 5))))
+
+print([x for x in range(-5,5) if x > 0])
+
+from functools import reduce
+print(reduce(lambda x, y: x + y, [1, 2, 3, 4]))
+print(reduce(lambda x, y: x + y, [1, 2, 3, 4]))
+
+L = [1, 2, 3, 4]
+res = L[0]
+for x in L[1:]:
+    res += x
+
+print(res)
+
+def myreduce(function, sequence):
+    tally = sequence[0]
+    for each in sequence[1:]:
+        tally = function(tally, each)
+    return tally
+
+print(myreduce((lambda x, y: x + y), [1, 2, 3, 4]))
 
 
 
