@@ -977,7 +977,7 @@ print([x for x in range(-5,5) if x > 0])
 
 from functools import reduce
 print(reduce(lambda x, y: x + y, [1, 2, 3, 4]))
-print(reduce(lambda x, y: x + y, [1, 2, 3, 4]))
+print(reduce((lambda x, y: x + y), [1, 2, 3, 4]))
 
 L = [1, 2, 3, 4]
 res = L[0]
@@ -994,15 +994,140 @@ def myreduce(function, sequence):
 
 print(myreduce((lambda x, y: x + y), [1, 2, 3, 4]))
 
+# Generators
+## Generator functions
+def gensquares(N):
+    for i in range(N):
+        yield i ** 2
 
+for i in gensquares(5):
+    print(i, end = ':')
 
+print('')
 
+x = gensquares(4)
+print(x)
+print(next(x))
+print(next(x))
+print(next(x))
+print(next(x))
+#print(next(x))
 
+# Generator functions return themselves for iter because they support next directly.
+y = gensquares(5) #returns a generator wich is its own iterator.
+print(y)
+print(iter(y) is y)
+print(next(y))
+print(next(y))
 
+for x in [n ** 2 for n in range(5)]:
+    print(x, end = ' : ')
 
+print('')
+print([n ** 2 for n in range(5)])
 
+def ups(line):
+    for sub in line.split(','):
+        yield sub.upper()
 
+print(tuple(ups('aaa,bbb,ccc')))
 
+print({i: s for (i, s) in enumerate(ups('aaa,bbb,ccc'))})
+
+def gen():
+    for i in range(10):
+        X = yield i
+        print(X)
+        
+G = gen()
+print(G)
+print(next(G))
+print(G.send(77))
+print(G.send(88))
+print(next(G))
+
+# List comprehension
+print([x ** 2 for x in range(4)])
+
+print((x ** 2 for x in range(4)))
+print(list(x ** 2 for x in range(4)))
+
+G = (x ** 2 for x in range(4))
+print(iter(G) is G)
+print(next(G))
+print(next(G))
+print(next(G))
+print(next(G))
+print('')
+
+for num in (x ** 2 for x in range(4)):
+    print('%s, %s' % (num, num/2.0))
+
+print(''.join(x.upper() for x in 'aaa,bbb,ccc'.split(',')))
+
+print('')
+a, b, c = (x + '\n' for x in 'aaa,bbb,ccc'.split(','))
+print(a, b, c)
+
+print(sum(x ** 2 for x in range(4)))
+print(sorted(x ** 2 for x in range(4)))
+print(sorted((x **2 for x in range(4)), reverse=True))
+
+print(list(map(abs, (-1, -2, 3, 4))))
+print(list(abs(x) for x in (-1, -2, 3, 4)))
+
+print(list(map(lambda x: x * 2, (1, 2, 3, 4))))
+print(list(x *2 for x in (1, 2, 3,4)))
+
+line = 'aaa,bbb,ccc'
+print(''.join(x.upper() for x in line.split(',')))
+print(''.join(x * 2 for x in line.split(',')))
+
+print('')
+print([x * 2 for x in [abs(x) for x in (-1, -2, 3, 4)]])
+print(list(map(lambda x: x * 2, map(abs, (-1, -2, 3, 4)))))
+print(list(x * 2 for x in (abs(x) for x in (-1, -2, 3, 4))))
+
+import math
+print(list(map(math.sqrt, (x ** 2 for x in range(4)))))
+
+import os
+for (root, subs, files) in os.walk('.'):
+    for name in files:
+        if name.startswith('call'):
+            print(root, name)
+            
+def f2(a, b, c):
+    print('%s %s and %s' % (a, b, c))
+
+#Normal positionals    
+f2(0, 1, 2)
+#unpack range values: iterable in 3.X
+f2(*range(3))
+#unpack generator expreesion values
+f2(*(i for i in range(3)))
+
+D = dict(a = 'Bob', b = 'dev', c = 40.5)
+print(D)
+
+#Normal keywords
+f2(a = 'Bob', b = 'dev', c = 40.5)
+# Unpack dict: key = value
+f2(**D)
+#Unpack keys iterator
+f2(*D)
+#Unpack view itereator: iterable in 3.X
+f2(*D.values())
+
+for x in 'spam':
+    print(x.upper(), end = ' ')
+    
+print('')
+list(print(x.upper(), end = ' ') for x in 'spam')
+print('')
+print(*(x.upper() for x in 'spam'))
+
+# Generating scrambled sequences.
 
 
 
